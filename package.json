@@ -1,11 +1,21 @@
 {
-  "name": "vue-dvd-saver",
+  "name": "aplr/vue-dvd-saver",
+  "author": "Andreas Pfurtscheller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aplr/vue-dvd-saver/issues"
+  },
+  "homepage": "https://github.com/aplr/vue-dvd-saver#readme",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/dvdSaver.umd.js",
+  "unpkg": "dist/dvdSaver.umd.min.js",
+  "module": "src/ScreenSaver.vue",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vueDvdSaver src/ScreenSaver.vue",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build --target lib --name dvdSaver src/ScreenSaver.vue",
+    "lint": "vue-cli-service lint",
+    "prepublish": "npm run lint && npm run build"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -36,5 +46,14 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aplr/vue-dvd-saver.git"
+  },
+  "files": [
+    "dist/dvdSaver.umd.js",
+    "dist/dvdSaver.umd.min.js",
+    "dist/dvdSaver.common.js"
+  ]
 }
