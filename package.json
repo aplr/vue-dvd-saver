@@ -10,7 +10,6 @@
   "description": "Brings your beloved nostalgic screensaver to your beloved JavaScript Framework.",
   "main": "dist/dvdSaver.umd.js",
   "unpkg": "dist/dvdSaver.umd.min.js",
-  "module": "src/ScreenSaver.vue",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name dvdSaver src/ScreenSaver.vue",
