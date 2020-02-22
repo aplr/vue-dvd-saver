@@ -1,24 +1,86 @@
-# vue-dvd-saver
+# Vue DVD Saver
 
-## Project setup
+Your beloved nostalgic screensaver for your beloved JavaScript Framework.
+
+[Will it hit the corner?](https://www.youtube.com/watch?v=QOtuX0jL85Y)
+
+## Quick Start
+
+### Install
+
+You can install `vue-dvd-saver` either using a package manager or by including the script in your html.
+
+#### Package Manager
+
+```bash
+npm install vue-dvd-saver
 ```
+
+```bash
+yarn install vue-dvd-saver
+```
+
+#### Unpkg
+
+```html
+<script src="https://www.unpkg.com/vue-dvd-saver@latest/dist/dvdSaver.umd.min.js">
+```
+
+### Basic Usage
+
+```vue
+<template>
+    <div>
+        <ScreenSaver class="screenSaver" />
+    </div>
+</template>
+
+<script>
+import ScreenSaver from "vue-dvd-saver";
+
+export default {
+    components: {
+        ScreenSaver
+    }
+}
+</script>
+
+<style>
+.screenSaver {
+    width: 100%;
+    height: 100%;
+}
+</style>
+```
+
+## Local development
+
+### Project setup
+
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+### Compile, hot-reload and run dev-server for development
+
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+### Compile and minify for production
+
+```bash
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
+### Compile and minify docs
+
+```bash
+npm run docs
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Lint and fix files
+
+```bash
+npm run lint
+```

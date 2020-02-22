@@ -54,7 +54,6 @@
     "src/ScreenSaver.vue",
     "src/assets/dvd.svg",
     "dist/dvdSaver.umd.js",
-    "dist/dvdSaver.umd.min.js",
-    "dist/dvdSaver.common.js"
+    "dist/dvdSaver.umd.min.js"
   ]
 }
