@@ -79,9 +79,7 @@ export default {
         this.xSpeed = this.ySpeed = this.speed
         this.generateColoredLogo()
         this.img.onload = () => {
-            this.logoHeight = Math.floor(
-                this.logoWidth * (this.img.height / this.img.width)
-            )
+            this.updateLogoHeight()
         }
     },
 
@@ -101,6 +99,7 @@ export default {
         },
         logoWidth() {
             this.x = this.y = 0
+            this.updateLogoHeight()
         }
     },
 
@@ -137,6 +136,11 @@ export default {
     methods: {
         generateColoredLogo(color) {
             this.img.src = color ? coloredLogo(color) : randomColoredLogo()
+        },
+        updateLogoHeight() {
+            this.logoHeight = Math.floor(
+                this.logoWidth * (this.img.height / this.img.width)
+            )
         },
         draw() {
             const ctx = this.$el.getContext('2d'),
