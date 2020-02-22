@@ -7,7 +7,7 @@
     "url": "https://github.com/aplr/vue-dvd-saver/issues"
   },
   "homepage": "https://github.com/aplr/vue-dvd-saver#readme",
-  "private": false,
+  "description": "Brings your beloved nostalgic screensaver to your beloved JavaScript Framework.",
   "main": "dist/dvdSaver.umd.js",
   "unpkg": "dist/dvdSaver.umd.min.js",
   "module": "src/ScreenSaver.vue",
