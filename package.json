@@ -51,6 +51,8 @@
     "url": "git+https://github.com/aplr/vue-dvd-saver.git"
   },
   "files": [
+    "src/ScreenSaver.vue",
+    "src/assets/dvd.svg",
     "dist/dvdSaver.umd.js",
     "dist/dvdSaver.umd.min.js",
     "dist/dvdSaver.common.js"
