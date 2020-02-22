@@ -1,4 +1,6 @@
 module.exports = {
+    publicPath: process.env.BUILD_DOCS ? './' : '/',
+    outputDir: process.env.BUILD_DOCS ? 'docs' : 'dist',
     chainWebpack: config => {
         const svgRule = config.module.rule('svg')
 

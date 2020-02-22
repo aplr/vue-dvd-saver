@@ -13,7 +13,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name dvdSaver --formats umd,umd-min src/ScreenSaver.vue",
-    "docs": "vue-cli-service build --target app --name dvdSaver --formats umd,umd-min --inline-vue --no-clean --dest docs",
+    "docs": "vue-cli-service build --target app --name dvdSaver --formats umd,umd-min --mode docs --inline-vue",
     "lint": "vue-cli-service lint",
     "prepublish": "npm run lint && npm run build"
   },
