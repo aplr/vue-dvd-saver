@@ -33,7 +33,7 @@ const coloredLogo = color => {
     logo.querySelectorAll('path,polygon').forEach(layer => {
         layer.setAttribute('fill', color)
     })
-    return `data:image/svg+xml;charset=utf-8,${logo.documentElement.outerHTML}`
+    return `data:image/svg+xml;utf8,${logo.documentElement.outerHTML}`
 }
 
 const randomColoredLogo = () => coloredLogo(randomColor())
@@ -69,6 +69,7 @@ export default {
         xSpeed: 0,
         ySpeed: 0,
         img: new Image(),
+        logoHeight: 0,
         lastCornerTime: 0,
         prevHitTime: 0,
         hitTime: 0
@@ -77,12 +78,17 @@ export default {
     created() {
         this.xSpeed = this.ySpeed = this.speed
         this.generateColoredLogo()
+        this.img.onload = () => {
+            this.logoHeight = Math.floor(
+                this.logoWidth * (this.img.height / this.img.width)
+            )
+        }
     },
 
     mounted() {
         this.$nextTick(() => {
-            window.addEventListener('resize', this.resize)
             this.resize()
+            window.addEventListener('resize', this.resize)
             this.lastCornerTime = this.prevHitTime = this.hitTime = performance.now()
             this.draw()
         })
@@ -99,11 +105,6 @@ export default {
     },
 
     computed: {
-        logoHeight() {
-            return Math.floor(
-                this.logoWidth * (this.img.height / this.img.width)
-            )
-        },
         canvasStyle() {
             return {
                 'background-color': this.backgroundColor
