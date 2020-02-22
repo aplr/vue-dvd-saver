@@ -32,12 +32,24 @@
                         ></b-form-input>
                     </b-input-group>
                 </div>
+                <div :class="$style.controlGroup">
+                    <b-form-radio-group
+                        buttons
+                        button-variant="outline-secondary"
+                        id="themeSelect"
+                        v-model="theme"
+                        :options="themeOptions"
+                        name="themeSelect"
+                        size="sm"
+                    ></b-form-radio-group>
+                </div>
             </b-form>
         </div>
         <ScreenSaver
             :class="$style.saver"
             :speed="speed"
             :logoWidth="logoWidth"
+            :theme="theme"
         />
     </div>
 </template>
@@ -53,7 +65,12 @@ export default {
 
     data: () => ({
         rawSpeed: 4,
-        rawWidth: 220
+        rawWidth: 220,
+        theme: 'dark',
+        themeOptions: [
+            { text: 'Light', value: 'light' },
+            { text: 'Dark', value: 'dark' }
+        ]
     }),
 
     computed: {
@@ -92,6 +109,7 @@ body {
     justify-content: space-between;
     flex: 0 0 auto;
     padding: 0.5rem 1rem;
+    border-bottom: 1px solid black;
 }
 
 .controlGroup {

@@ -17,7 +17,7 @@ const randomColor = () => {
 
 const colorizedLogo = color => {
     const logo = parseSvg(DvdLogo)
-    logo.getElementsByTagName('path').forEach(layer => {
+    logo.querySelectorAll('path,polygon').forEach(layer => {
         layer.setAttribute('fill', color)
     })
     return `data:image/svg+xml;charset=utf-8,${logo.documentElement.outerHTML}`
