@@ -1,13 +1,13 @@
 {
   "name": "aplr/vue-dvd-saver",
+  "version": "0.1.0",
   "author": "Andreas Pfurtscheller",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aplr/vue-dvd-saver/issues"
   },
   "homepage": "https://github.com/aplr/vue-dvd-saver#readme",
-  "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "dist/dvdSaver.umd.js",
   "unpkg": "dist/dvdSaver.umd.min.js",
   "module": "src/ScreenSaver.vue",
