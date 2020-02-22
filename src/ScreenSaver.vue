@@ -36,6 +36,12 @@ export default {
             type: Number,
             required: false,
             default: 220
+        },
+        theme: {
+            type: String,
+            required: false,
+            default: 'dark',
+            validator: val => ['dark', 'light'].indexOf(val) !== -1
         }
     },
 
@@ -76,7 +82,8 @@ export default {
         },
         canvasStyle() {
             return {
-                'background-color': 'black'
+                'background-color':
+                    this.theme === 'light' ? '#ffffff' : '#000000'
             }
         }
     },
