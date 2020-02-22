@@ -82,8 +82,16 @@ export default {
         },
         canvasStyle() {
             return {
-                'background-color':
-                    this.theme === 'light' ? '#ffffff' : '#000000'
+                'background-color': this.backgroundColor
+            }
+        },
+        backgroundColor() {
+            return this.backgroundColors[this.theme]
+        },
+        backgroundColors() {
+            return {
+                dark: '#000000',
+                light: '#ffffff'
             }
         }
     },
@@ -96,7 +104,7 @@ export default {
             const ctx = this.$el.getContext('2d'),
                 { img, x, y, logoWidth, logoHeight, xSpeed, ySpeed } = this
 
-            ctx.fillStyle = '#000'
+            ctx.fillStyle = this.backgroundColor
             ctx.fillRect(0, 0, this.$el.width, this.$el.height)
             ctx.drawImage(img, x, y, logoWidth, logoHeight)
 
