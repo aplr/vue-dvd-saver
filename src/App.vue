@@ -4,6 +4,15 @@
             <h5 class="m-0">Vue DVD Saver</h5>
             <b-form inline>
                 <div :class="$style.controlGroup">
+                    <b-form-checkbox
+                        v-model="showTimer"
+                        name="timerSwitch"
+                        switch
+                    >
+                        Show Timer
+                    </b-form-checkbox>
+                </div>
+                <div :class="$style.controlGroup">
                     <label for="inputSpeed" class="mr-2">Speed</label>
                     <b-form-input
                         type="range"
@@ -50,6 +59,7 @@
             :speed="speed"
             :logoWidth="logoWidth"
             :theme="theme"
+            :showTimer="showTimer"
         />
     </div>
 </template>
@@ -64,8 +74,9 @@ export default {
     },
 
     data: () => ({
-        rawSpeed: 4,
+        rawSpeed: 1,
         rawWidth: 220,
+        showTimer: false,
         theme: 'dark',
         themeOptions: [
             { text: 'Light', value: 'light' },

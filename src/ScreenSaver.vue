@@ -5,6 +5,19 @@
 <script>
 import DvdLogo from '@/assets/dvd.svg?inline'
 
+const gcd = (x, y) => {
+    x = Math.abs(x)
+    y = Math.abs(y)
+    while (y) {
+        var t = y
+        y = x % y
+        x = t
+    }
+    return x
+}
+
+const lcm = (x, y) => (!x || !y ? 0 : Math.abs((x * y) / gcd(x, y)))
+
 const parseSvg = svg => {
     return new DOMParser().parseFromString(svg, 'image/svg+xml')
 }
@@ -15,7 +28,7 @@ const randomColor = () => {
     return `rgb(${c()}, ${c()}, ${c()})`
 }
 
-const colorizedLogo = color => {
+const coloredLogo = color => {
     const logo = parseSvg(DvdLogo)
     logo.querySelectorAll('path,polygon').forEach(layer => {
         layer.setAttribute('fill', color)
@@ -23,7 +36,7 @@ const colorizedLogo = color => {
     return `data:image/svg+xml;charset=utf-8,${logo.documentElement.outerHTML}`
 }
 
-const randomColoredLogo = () => colorizedLogo(randomColor())
+const randomColoredLogo = () => coloredLogo(randomColor())
 
 export default {
     props: {
@@ -42,6 +55,11 @@ export default {
             required: false,
             default: 'dark',
             validator: val => ['dark', 'light'].indexOf(val) !== -1
+        },
+        showTimer: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
 
@@ -50,7 +68,10 @@ export default {
         y: 0,
         xSpeed: 0,
         ySpeed: 0,
-        img: new Image()
+        img: new Image(),
+        lastCornerTime: 0,
+        prevHitTime: 0,
+        hitTime: 0
     }),
 
     created() {
@@ -62,6 +83,7 @@ export default {
         this.$nextTick(() => {
             window.addEventListener('resize', this.resize)
             this.resize()
+            this.lastCornerTime = this.prevHitTime = this.hitTime = performance.now()
             this.draw()
         })
     },
@@ -78,7 +100,9 @@ export default {
 
     computed: {
         logoHeight() {
-            return this.logoWidth * (this.img.height / this.img.width)
+            return Math.floor(
+                this.logoWidth * (this.img.height / this.img.width)
+            )
         },
         canvasStyle() {
             return {
@@ -93,12 +117,25 @@ export default {
                 dark: '#000000',
                 light: '#ffffff'
             }
+        },
+        edgeTime() {
+            return Math.floor(this.hitTime - this.prevHitTime)
+        },
+        timeToCorner() {
+            return (
+                ((this.edgeTime / 1000) *
+                    lcm(
+                        this.$el.height - this.logoHeight,
+                        this.$el.width - this.logoWidth
+                    )) /
+                (this.$el.width - this.logoWidth)
+            )
         }
     },
 
     methods: {
-        generateColoredLogo() {
-            this.img.src = randomColoredLogo()
+        generateColoredLogo(color) {
+            this.img.src = color ? coloredLogo(color) : randomColoredLogo()
         },
         draw() {
             const ctx = this.$el.getContext('2d'),
@@ -108,16 +145,44 @@ export default {
             ctx.fillRect(0, 0, this.$el.width, this.$el.height)
             ctx.drawImage(img, x, y, logoWidth, logoHeight)
 
+            if (this.showTimer) {
+                ctx.font = '16px Arial'
+                ctx.fillStyle = '#fff'
+
+                const countdown = Math.round(
+                    this.timeToCorner -
+                        (performance.now() - this.lastCornerTime) / 1000
+                )
+
+                ctx.fillText(
+                    this.prevHitTime == this.hitTime
+                        ? 'Calculating corner time...'
+                        : `Corner in ${countdown}s`,
+                    16,
+                    36
+                )
+            }
+
             this.x += xSpeed
             this.y += ySpeed
 
-            if (logoWidth + this.x >= this.$el.width || this.x <= 0) {
+            const xHit = logoWidth + this.x >= this.$el.width || this.x <= 0
+            const yHit = logoHeight + this.y >= this.$el.height || this.y <= 0
+
+            if (xHit) {
                 this.xSpeed *= -1
-                this.generateColoredLogo()
+                this.prevHitTime = this.hitTime
+                this.hitTime = performance.now()
             }
 
-            if (logoHeight + this.y >= this.$el.height || this.y <= 0) {
+            if (yHit) {
                 this.ySpeed *= -1
+            }
+
+            if (xHit && yHit) {
+                this.generateColoredLogo('rgb(255,255,255)')
+                this.lastCornerTime = performance.now()
+            } else if (xHit || yHit) {
                 this.generateColoredLogo()
             }
 
