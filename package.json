@@ -1,13 +1,9 @@
 {
   "name": "vue-dvd-saver",
   "version": "0.2.1",
+  "description": "Brings your beloved nostalgic screensaver to your beloved JavaScript Framework.",
   "author": "Andreas Pfurtscheller",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/aplr/vue-dvd-saver/issues"
-  },
-  "homepage": "https://github.com/aplr/vue-dvd-saver#readme",
-  "description": "Brings your beloved nostalgic screensaver to your beloved JavaScript Framework.",
   "main": "dist/dvdSaver.umd.js",
   "unpkg": "dist/dvdSaver.umd.min.js",
   "scripts": {
@@ -55,5 +51,9 @@
     "src/assets/dvd.svg",
     "dist/dvdSaver.umd.js",
     "dist/dvdSaver.umd.min.js"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/aplr/vue-dvd-saver/issues"
+  },
+  "homepage": "https://github.com/aplr/vue-dvd-saver#readme"
 }

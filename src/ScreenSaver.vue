@@ -72,7 +72,8 @@ export default {
         logoHeight: 0,
         lastCornerTime: 0,
         prevHitTime: 0,
-        hitTime: 0
+        hitTime: 0,
+        running: false
     }),
 
     created() {
@@ -88,8 +89,14 @@ export default {
             this.resize()
             window.addEventListener('resize', this.resize)
             this.lastCornerTime = this.prevHitTime = this.hitTime = performance.now()
+            this.running = true
             this.draw()
         })
+    },
+
+    beforeDestroy() {
+        this.running = false
+        window.removeEventListener('resize', this.resize)
     },
 
     watch: {
@@ -191,7 +198,9 @@ export default {
                 this.generateColoredLogo()
             }
 
-            requestAnimationFrame(this.draw)
+            if (this.running) {
+                requestAnimationFrame(this.draw)
+            }
         },
         resize() {
             this.$el.width = this.$el.clientWidth
